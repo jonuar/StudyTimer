@@ -1,5 +1,5 @@
 from datetime import datetime
-
+import time
 
 entrada = input('Presiona 1 para empezar el contador: ')
 while (entrada != '1'):
