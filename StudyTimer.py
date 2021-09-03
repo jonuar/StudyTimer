@@ -1,5 +1,6 @@
 from datetime import datetime
 import time
+import tkinter
 
 entrada = input('Presiona 1 para empezar el contador: ')
 while (entrada != '1'):
