@@ -3,6 +3,7 @@ from datetime import datetime, timedelta
 # TO DO:
 # Mejorar la presentación de las opciones.
 # Ponerle colores al texto.
+# GUI
 # Ejecutable.
 
 # Variable global
