@@ -1,6 +1,7 @@
 from datetime import datetime, timedelta
 from colorama import Fore, Style, init
 import os
+import csv
 
 # TO DO:
 # GUI
@@ -73,28 +74,46 @@ def stop_timer(start_time):
     end_time = datetime.now()
     elapsed = end_time - start_time
     print(Fore.GREEN + f"_____DURACIÓN TOTAL: {elapsed}_____")
+    confirmar_guardado(start_time, end_time, elapsed)
 
 def show_total_time():
+    global start_global
+    end_time = datetime.now()
     total = sum(time_cache, timedelta())
     print(Fore.GREEN + f"_____DURACIÓN TOTAL: {total}_____")
+    confirmar_guardado(start_global, end_time, total)
 
-    def guardar_log(start, end, duration):
-        carpeta = 'logs'
-        archivo = os.path.join(carpeta, 'estudio_log.csv')
-        os.makedirs(carpeta, exist_ok=True)
+def guardar_log(start, end, duration):
+    carpeta = 'logs'
+    archivo = os.path.join(carpeta, 'estudio_log.csv')
+    os.makedirs(carpeta, exist_ok=True)
 
-        nuevo = not os.path.exists(archivo)
-        with open(archivo, 'a', newline='', encoding='utf-8') as f:
-            writer = csv.writer(f)
-            if nuevo:
-                writer.writerow(['Fecha', 'Inicio', 'Fin', 'Duración'])
-            writer.writerow([
-                start.date(),
-                start.strftime('%H:%M:%S'),
-                end.strftime('%H:%M:%S'),
-                str(duration)
-            ])
-        print(Fore.CYAN + '✅ Sesión guardada en logs/estudio_log.csv')
+    nuevo = not os.path.exists(archivo)
+    with open(archivo, 'a', newline='', encoding='utf-8') as f:
+        writer = csv.writer(f)
+        if nuevo:
+            writer.writerow(['Fecha', 'Inicio', 'Fin', 'Duración'])
+        writer.writerow([
+            start.date(),
+            start.strftime('%H:%M:%S'),
+            end.strftime('%H:%M:%S'),
+            str(duration)
+        ])
+    print(Fore.CYAN + '✅ Sesión guardada en logs/estudio_log.csv')
+
+def confirmar_guardado(start, end, duration):
+    opcion = get_input(
+        f"¿Deseas guardar esta sesión de estudio? Duración: {duration} (s/n):", ['s', 'n'])
+    while True:
+        if opcion == 's':
+            guardar_log(start, end, duration)
+            break
+        elif opcion == 'n':
+            print(Fore.YELLOW + '⏭ Sesión no guardada.')
+            break
+        else:
+            opcion = input(Fore.YELLOW + '¿Deseas guardar esta sesión de estudio? (s/n): ').lower()
+
 
 def main():
     print_title()
