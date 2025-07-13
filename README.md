@@ -1,6 +1,6 @@
-# ⏳ Temporizador de Estudio
+# Temporizador de Estudio
 
-Este proyecto es un **cronómetro de estudio** hecho con Python. Su propósito es ayudarte a registrar cuánto tiempo dedicas al estudio, incluyendo pausas y reanudaciones.
+Este proyecto es un **cronómetro de estudio** hecho con Python. Su propósito es ayudar a registrar cuánto tiempo dedicas al estudio, incluyendo pausas y reanudaciones.
 
 ## ¿Qué hace?
 
@@ -9,6 +9,8 @@ Este proyecto es un **cronómetro de estudio** hecho con Python. Su propósito e
 - Muestra la duración total al detenerse.
 - Guarda los intervalos pausados.
 - Usa colores en la consola para una mejor experiencia visual.
+- Guarda cada sesión de estudio en un archivo CSV (`logs/estudio_log.csv`)
+- Registra fecha, hora de inicio, fin y duración total
 
 ## Requisitos
 

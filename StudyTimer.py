@@ -1,5 +1,6 @@
 from datetime import datetime, timedelta
 from colorama import Fore, Style, init
+import os
 
 # TO DO:
 # GUI
@@ -7,6 +8,7 @@ from colorama import Fore, Style, init
 
 # Variable global
 time_cache = []
+start_global = None
 
 # Inicializa colorama
 init(autoreset=True)
@@ -14,7 +16,7 @@ init(autoreset=True)
 
 def print_title():
     print(Fore.CYAN + '^' * 70)
-    print(Fore.GREEN + 'HOLA, SOY UN CRONÓMETRO. TE AYUDARÉ A REGISTRAR TU TIEMPO DE ESTUDIO.')
+    print(Fore.GREEN + 'HOLA, TE AYUDARÉ A REGISTRAR TU TIEMPO DE ESTUDIO.')
     print(Fore.CYAN + '^' * 70)
 
 def get_input(prompt, valid_options):
@@ -25,16 +27,17 @@ def get_input(prompt, valid_options):
         print(Fore.RED + 'Opción no válida. Intenta de nuevo.')
 
 def start_timer():
-    start = datetime.now()
+    global start_global
+    start_global = datetime.now()
     print(Fore.BLUE + '<CONTADOR EN MARCHA>')
     
     while True:
         option = get_input('Presiona 2 para detener o 3 para pausar:', ['2', '3'])
         if option == '2':
-            stop_timer(start)
+            stop_timer(start_global)
             break
         elif option == '3':
-            pause_timer(start)
+            pause_timer(start_global)
             break
 
 def pause_timer(start_time):
@@ -74,6 +77,24 @@ def stop_timer(start_time):
 def show_total_time():
     total = sum(time_cache, timedelta())
     print(Fore.GREEN + f"_____DURACIÓN TOTAL: {total}_____")
+
+    def guardar_log(start, end, duration):
+        carpeta = 'logs'
+        archivo = os.path.join(carpeta, 'estudio_log.csv')
+        os.makedirs(carpeta, exist_ok=True)
+
+        nuevo = not os.path.exists(archivo)
+        with open(archivo, 'a', newline='', encoding='utf-8') as f:
+            writer = csv.writer(f)
+            if nuevo:
+                writer.writerow(['Fecha', 'Inicio', 'Fin', 'Duración'])
+            writer.writerow([
+                start.date(),
+                start.strftime('%H:%M:%S'),
+                end.strftime('%H:%M:%S'),
+                str(duration)
+            ])
+        print(Fore.CYAN + '✅ Sesión guardada en logs/estudio_log.csv')
 
 def main():
     print_title()
