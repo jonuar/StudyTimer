@@ -1,3 +1,48 @@
+ENG
+# Study Timer
+
+This project is a **study stopwatch** built with Python. Its purpose is to help you track how much time you spend studying, including pauses and resumes.
+
+## What does it do?
+
+- Starts a timer  
+- Allows pausing and resuming  
+- Shows total duration when stopped  
+- Logs paused intervals  
+- Uses console colors for a better visual experience  
+- Saves each study session to a CSV file (`logs/estudio_log.csv`)  
+- Records date, start time, end time, and total duration  
+
+## Requirements
+
+You need Python 3 installed. Also, install the `colorama` package:
+
+```bash
+pip install colorama
+```
+
+## How to use it?
+
+python timer.py
+
+## Instructions:
+
+- Press 1 to start
+
+- While running:
+-- Press 2 to stop
+-- Press 3 to pause
+
+- If paused:
+-- Press 4 to resume
+-- Press 5 to stop
+
+- If resumed:
+-- Press 6 to pause again
+-- Press 7 to stop
+
+
+SPA
 # Temporizador de Estudio
 
 Este proyecto es un **cronómetro de estudio** hecho con Python. Su propósito es ayudar a registrar cuánto tiempo dedicas al estudio, incluyendo pausas y reanudaciones.
