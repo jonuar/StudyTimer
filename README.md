@@ -12,6 +12,8 @@ This project is a **study stopwatch** built with Python. Its purpose is to help 
 - Uses console colors for a better visual experience  
 - Saves each study session to a CSV file (`logs/estudio_log.csv`)  
 - Records date, start time, end time, and total duration  
+- Shows study history with all recorded sessions  
+- Displays detailed statistics including total study time, session averages, and best study day  
 
 ## Requirements
 
@@ -27,7 +29,11 @@ python timer.py
 
 ## Instructions:
 
-- Press 1 to start
+- Press 1 to start the timer
+- Press 2 to view study history  
+- Press 3 to exit  
+
+### During timer:
 
 - While running:
 -- Press 2 to stop
@@ -56,6 +62,8 @@ Este proyecto es un **cronómetro de estudio** hecho con Python. Su propósito e
 - Usa colores en la consola para una mejor experiencia visual.
 - Guarda cada sesión de estudio en un archivo CSV (`logs/estudio_log.csv`)
 - Registra fecha, hora de inicio, fin y duración total
+- Muestra historial de estudio con todas las sesiones registradas
+- Presenta estadísticas detalladas incluyendo tiempo total de estudio, promedios por sesión y mejor día de estudio
 
 ## Requisitos
 
@@ -72,7 +80,11 @@ python timer.py
 
 ###  Instrucciones:
 
-- Presiona 1 para comenzar.
+- Presiona 1 para comenzar el cronómetro.
+- Presiona 2 para ver el historial de estudio.
+- Presiona 3 para salir.
+
+### Durante el cronómetro:
 
 - Durante el conteo:
 -- Presiona 2 para detener.
