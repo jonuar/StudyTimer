@@ -148,6 +148,51 @@ def mostrar_historial():
         print(Fore.RED + f"Error al leer el historial: {e}")
 
 
+def mostrar_estadisticas():
+    archivo = 'logs/estudio_log.csv'
+    if not os.path.exists(archivo):
+        print(Fore.YELLOW + "No hay registros para mostrar estadísticas.")
+        return
+
+    print(Fore.CYAN + '\n=== ESTADÍSTICAS DE ESTUDIO ===')
+    try:
+        total_time = timedelta()
+        sessions_count = 0
+        daily_totals = {}
+        
+        with open(archivo, newline='', encoding='utf-8') as f:
+            reader = csv.DictReader(f)
+            for row in reader:
+                sessions_count += 1
+                # Parsear duración (formato HH:MM:SS)
+                duration_parts = row['Duración'].split(':')
+                session_duration = timedelta(
+                    hours=int(duration_parts[0]),
+                    minutes=int(duration_parts[1]),
+                    seconds=int(duration_parts[2])
+                )
+                total_time += session_duration
+                
+                # Agrupar por fecha
+                fecha = row['Fecha']
+                if fecha in daily_totals:
+                    daily_totals[fecha] += session_duration
+                else:
+                    daily_totals[fecha] = session_duration
+        
+        print(f"📊 Total de sesiones: {sessions_count}")
+        print(f"⏱️  Tiempo total estudiado: {format_duration(total_time)}")
+        print(f"📈 Promedio por sesión: {format_duration(total_time / sessions_count if sessions_count > 0 else timedelta())}")
+        print(f"📅 Días activos: {len(daily_totals)}")
+        
+        if daily_totals:
+            mejor_dia = max(daily_totals.items(), key=lambda x: x[1])
+            print(f"🏆 Mejor día: {mejor_dia[0]} ({format_duration(mejor_dia[1])})")
+            
+    except Exception as e:
+        print(Fore.RED + f"Error al calcular estadísticas: {e}")
+
+
 def format_duration(duration):
     total_seconds = int(duration.total_seconds())
     return str(timedelta(seconds=total_seconds))
