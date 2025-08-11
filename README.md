@@ -1,6 +1,5 @@
 ENG
 # Study Timer
-
 This project is a **study stopwatch** built with Python. Its purpose is to help you track how much time you spend studying, including pauses and resumes.
 
 ## What does it do?
